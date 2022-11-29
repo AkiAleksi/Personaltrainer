@@ -16,7 +16,7 @@ export default function Traininglist() {
 
       const defaultMaterialTheme = createTheme();
     
-    useEffect(() => fetchData(), []);
+    useEffect(() => fetchData());
     
     const fetchCustomer = async(uri) => {
         let resp = await fetch(uri)
