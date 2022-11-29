@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import MaterialTable from 'material-table';
 import { ThemeProvider, createTheme } from '@mui/material'
-//import 'react-table/react-table.css';
+
 
 
 export default function Customerlist() {
@@ -32,4 +32,3 @@ export default function Customerlist() {
       </div>
     );
 }
-//<ReactTable filterable={true} data={customers} columns={columns} />

@@ -14,7 +14,7 @@ export default function Traininglist() {
         {title: 'Customer lastname', field: 'customer.lastname'}
       ];
 
-      const defaultMaterialTheme = createTheme();
+    const defaultMaterialTheme = createTheme();
     
     useEffect(() => fetchData());
     
