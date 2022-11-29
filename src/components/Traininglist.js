@@ -19,10 +19,13 @@ export default function Traininglist() {
     useEffect(() => fetchData());
     
     const fetchCustomer = async(uri) => {
+        try {
         let resp = await fetch(uri)
         let json = await resp.json()
         return json
-
+        }catch(ex) {
+            console.log(ex)
+        }
     }
 
 
