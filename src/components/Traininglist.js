@@ -21,8 +21,11 @@ export default function Traininglist() {
     const fetchCustomer = async(uri) => {
         try {
         let resp = await fetch(uri)
-        let json = await resp.json()
-        return json
+        if (resp.status === 200) {
+            let json = await resp.json()
+            return json
+        }
+        
         }catch(ex) {
             console.log(ex)
         }
