@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import moment from 'moment';
 import MaterialTable from 'material-table';
 import { ThemeProvider, createTheme } from '@mui/material'
+import { deleteTraining } from '../helper/api';
 
 
 
@@ -51,11 +52,29 @@ export default function Traininglist() {
       
 
     }
+    const handleDeleteTraining = async(href) => {
+        await deleteTraining(href)
+    }
 
     return (
         <div style={{ maxWidth: '100%' }}>
         <ThemeProvider theme={defaultMaterialTheme}>
-        <MaterialTable columns={columns} data={trainings} title='Training list' />
+        <MaterialTable columns={columns} data={trainings} title='Training list' editable={{
+            onRowDelete:(selectedRow)=> new Promise((resolve, reject)=>{
+                const updatedData = [...trainings]
+                        let trainingHref = selectedRow.links.find(i => i.rel === 'training').href 
+                        handleDeleteTraining(trainingHref)
+                        updatedData.splice(selectedRow.tableData.id, 1)
+                        console.log(selectedRow)
+                        setTrainings(updatedData)
+                        resolve()
+
+            })
+
+        }}
+        options={{
+            addRowPosition:"first",actionsColumnIndex:-1
+        }}/>
         </ThemeProvider>
       </div>
     );
