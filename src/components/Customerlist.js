@@ -5,7 +5,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { saveCustomer, editCustomer, deleteCustomer, saveTrainingSession } from '../helper/api';
-import Traininglist from './Traininglist';
+
 
 
 
@@ -101,7 +101,6 @@ export default function Customerlist() {
             <ThemeProvider theme={defaultMaterialTheme}>
                 <MaterialTable columns={columns} data={customers} title='Customer list' editable={{
                     onRowAdd: (newRow) => new Promise((resolve, reject) => {
-                        console.log(newRow)
                         handleAddNewCustomer(newRow)
                         setCustomers([...customers, newRow])
                         resolve()
@@ -112,7 +111,6 @@ export default function Customerlist() {
                         let customerHref = oldRow.links.find(i => i.rel === 'customer').href 
                         updatedData[oldRow.tableData.id] = newRow
                         handleEditCustomer(customerHref, newRow)
-                        console.log(newRow)
                         setCustomers(updatedData)
                         resolve()
 
@@ -123,7 +121,6 @@ export default function Customerlist() {
                         let customerHref = selectedRow.links.find(i => i.rel === 'customer').href 
                         handleDeleteCustomer(customerHref)
                         updatedData.splice(selectedRow.tableData.id, 1)
-                        console.log(selectedRow)
                         setCustomers(updatedData)
                         resolve()
 

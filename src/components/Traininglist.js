@@ -65,7 +65,6 @@ export default function Traininglist() {
                         let trainingHref = selectedRow.links.find(i => i.rel === 'training').href 
                         handleDeleteTraining(trainingHref)
                         updatedData.splice(selectedRow.tableData.id, 1)
-                        console.log(selectedRow)
                         setTrainings(updatedData)
                         resolve()
 
