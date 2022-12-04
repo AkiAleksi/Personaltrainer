@@ -3,7 +3,7 @@ import MaterialTable from 'material-table';
 import { ThemeProvider, createTheme, Modal, Box, Typography, TextField, Button, Stack } from '@mui/material'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
-import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { saveCustomer, editCustomer, deleteCustomer, saveTrainingSession } from '../helper/api';
 
 
@@ -65,12 +65,12 @@ export default function Customerlist() {
 
     const handleTrainingDate = (e) => {
         setTrainingDate(e)
-        console.log(e)
+        
     }
 
     const handleDuration = (e) => {
         setDuration(e.target.value)
-        console.log(e.target.value)
+        
     }
 
     const handleSave = async() => {
@@ -154,9 +154,9 @@ export default function Customerlist() {
                         <TextField label="duration" id="filled-hidden-label-small" type="number" variant="standard" size="small"   onChange={handleDuration} />
                         <LocalizationProvider dateAdapter={ AdapterMoment}>
 
-                            <DesktopDatePicker
+                            <DateTimePicker
                                 label="Date desktop"
-                                inputFormat="MM/DD/YYYY"
+                                inputFormat="MM/DD/YYYY:hh/mm"
                                 value={trainingDate}
                                 onChange={handleTrainingDate}
                                 renderInput={(params) => <TextField {...params} />}
