@@ -102,31 +102,29 @@ export default function Customerlist() {
         <div style={{ maxWidth: '100%' }}>
             <ThemeProvider theme={defaultMaterialTheme}>
                 <MaterialTable columns={columns} data={customers} title='Customer list' editable={{
-                    onRowAdd: (newRow) => new Promise((resolve, reject) => {
-                        handleAddNewCustomer(newRow)
-                        setCustomers([...customers, newRow])
-                        resolve()
+                    onRowAdd: async(newRow) => {
+                        await handleAddNewCustomer(newRow)
+                        fetchData()
+                       
 
-                    }),
-                    onRowUpdate: (newRow, oldRow) => new Promise((resolve, reject) => {
+                    },
+                    onRowUpdate: async(newRow, oldRow) => {
                         const updatedData = [...customers]
-                        let customerHref = oldRow.links.find(i => i.rel === 'customer').href 
                         updatedData[oldRow.tableData.id] = newRow
-                        handleEditCustomer(customerHref, newRow)
+                        let customerHref = oldRow.links.find(i => i.rel === 'customer').href 
+                        await handleEditCustomer(customerHref, newRow)
                         setCustomers(updatedData)
-                        resolve()
+                        
 
-                    }),
+                    },
 
-                    onRowDelete: (selectedRow) => new Promise((resolve, reject) => {
-                        const updatedData = [...customers]
+                    onRowDelete: async(selectedRow) => {
                         let customerHref = selectedRow.links.find(i => i.rel === 'customer').href 
-                        handleDeleteCustomer(customerHref)
-                        updatedData.splice(selectedRow.tableData.id, 1)
-                        setCustomers(updatedData)
-                        resolve()
+                        await handleDeleteCustomer(customerHref)
+                        fetchData()
+                       
 
-                    })
+                    }
 
                 }}
                     actions={[

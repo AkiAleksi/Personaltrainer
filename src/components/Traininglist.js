@@ -62,15 +62,13 @@ export default function Traininglist() {
         <div style={{ maxWidth: '100%' }}>
         <ThemeProvider theme={defaultMaterialTheme}>
         <MaterialTable columns={columns} data={trainings} title='Training list' editable={{
-            onRowDelete:(selectedRow)=> new Promise((resolve, reject)=>{
+            onRowDelete:async(selectedRow) =>{
                 const updatedData = [...trainings]
                         let trainingHref = selectedRow.links.find(i => i.rel === 'training').href 
-                        handleDeleteTraining(trainingHref)
-                        updatedData.splice(selectedRow.tableData.id, 1)
-                        setTrainings(updatedData)
-                        resolve()
+                        await handleDeleteTraining(trainingHref)
+                        fetchData()
 
-            })
+            }
 
         }}
         options={{
