@@ -5,6 +5,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { saveCustomer, editCustomer, deleteCustomer, saveTrainingSession } from '../helper/api';
+import moment from 'moment';
 
 
 
@@ -26,7 +27,7 @@ export default function Customerlist() {
     const [open, setOpen] = useState(false);
     //Training session addTraining
     const [addTraining, setAddTraining] = useState({});
-    const [trainingDate, setTrainingDate] = useState();
+    const [trainingDate, setTrainingDate] = useState(moment());
     const [duration, setDuration] = useState();
     const [training, setTraining] = useState();
 
@@ -146,17 +147,17 @@ export default function Customerlist() {
                     <Box sx={style}>
                     <Stack spacing={2}>
                         <Typography id="modal-modal-title" variant="h6" component="h2">
-                            Add new training for a customer
+                            Add a new training session for a customer
                         </Typography>
                         <TextField hiddenLabel id="filled-hidden-label-small" defaultValue={addTraining.firstname} variant="filled" size="small" disabled />
                         <TextField hiddenLabel id="filled-hidden-label-small" defaultValue={addTraining.lastname} variant="filled" size="small" disabled />
-                        <TextField label="Add training" id="filled-hidden-label-small" variant="standard" size="small" onChange={e => setTraining(e.target.value)} />
-                        <TextField label="duration" id="filled-hidden-label-small" type="number" variant="standard" size="small"   onChange={handleDuration} />
+                        <TextField label="Add a training session" id="filled-hidden-label-small" variant="standard" size="small" onChange={e => setTraining(e.target.value)} />
+                        <TextField label="Duration in minutes" id="filled-hidden-label-small" type="number" variant="standard" size="small"   onChange={handleDuration} />
                         <LocalizationProvider dateAdapter={ AdapterMoment}>
 
                             <DateTimePicker
                                 label="Date desktop"
-                                inputFormat="MM/DD/YYYY:hh/mm"
+                                inputFormat="MM/DD/YYYY hh:mm"
                                 value={trainingDate}
                                 onChange={handleTrainingDate}
                                 renderInput={(params) => <TextField {...params} />}
