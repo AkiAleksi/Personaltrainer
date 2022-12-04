@@ -24,6 +24,7 @@ const style = {
 
 export default function Customerlist() {
     const [customers, setCustomers] = useState([]);
+    //for showing modal
     const [open, setOpen] = useState(false);
     //Training session 
     const [addTraining, setAddTraining] = useState({});
@@ -31,8 +32,9 @@ export default function Customerlist() {
     const [trainingDate, setTrainingDate] = useState(moment());
     const [duration, setDuration] = useState();
     const [training, setTraining] = useState();
-
+    //Theme for material-table
     const defaultMaterialTheme = createTheme();
+    
     const columns = [
         { title: 'Firstname', field: 'firstname' },
         { title: 'Lastname', field: 'lastname' },
@@ -59,7 +61,7 @@ export default function Customerlist() {
         await deleteCustomer(href)
     }
 
-    //modal
+    //handle modal input
     const handleAddTraining = (rowData) => {
         setAddTraining(rowData)
         setOpen(true)

@@ -49,7 +49,7 @@ export default function Traininglist() {
                 trainingData.push(training)
             }
             setTrainings(trainingData)
-            console.log(trainingData)
+            
             
       
 
@@ -63,7 +63,6 @@ export default function Traininglist() {
         <ThemeProvider theme={defaultMaterialTheme}>
         <MaterialTable columns={columns} data={trainings} title='Training list' editable={{
             onRowDelete:async(selectedRow) =>{
-                const updatedData = [...trainings]
                         let trainingHref = selectedRow.links.find(i => i.rel === 'training').href 
                         await handleDeleteTraining(trainingHref)
                         fetchData()
