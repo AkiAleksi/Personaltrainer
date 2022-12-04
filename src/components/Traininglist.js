@@ -10,7 +10,8 @@ export default function Traininglist() {
     const [trainings, setTrainings] = useState([]);
     const columns = [
         { title: 'Training', field: 'activity' },
-        { title: 'Date', field: 'date' },
+        { title: 'Date and time', field: 'date' },
+        {title: 'Duration in minutes', field: 'duration'},
         {title: 'Customer firstname', field: 'customer.firstname'},
         {title: 'Customer lastname', field: 'customer.lastname'}
       ];
@@ -48,6 +49,7 @@ export default function Traininglist() {
                 trainingData.push(training)
             }
             setTrainings(trainingData)
+            console.log(trainingData)
             
       
 

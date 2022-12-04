@@ -9,7 +9,7 @@ import moment from 'moment';
 
 
 
-
+//style for modal
 const style = {
     position: 'absolute',
     top: '50%',
@@ -25,8 +25,9 @@ const style = {
 export default function Customerlist() {
     const [customers, setCustomers] = useState([]);
     const [open, setOpen] = useState(false);
-    //Training session addTraining
+    //Training session 
     const [addTraining, setAddTraining] = useState({});
+    //values added to training session
     const [trainingDate, setTrainingDate] = useState(moment());
     const [duration, setDuration] = useState();
     const [training, setTraining] = useState();
@@ -45,7 +46,7 @@ export default function Customerlist() {
             .then(response => response.json())
             .then(data => setCustomers(data.content))
     }
-
+    //handle CRUD
     const handleAddNewCustomer = async(rowData) => {
         await saveCustomer(rowData)
     }
