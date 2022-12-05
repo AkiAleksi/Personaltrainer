@@ -5,6 +5,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { saveCustomer, editCustomer, deleteCustomer, saveTrainingSession } from '../helper/api';
+import ReactCSV from './ReactCSV';
 import moment from 'moment';
 
 
@@ -101,9 +102,10 @@ export default function Customerlist() {
     }
 
     return (
+        
         <div style={{ maxWidth: '100%' }}>
             <ThemeProvider theme={defaultMaterialTheme}>
-                <MaterialTable columns={columns} data={customers} title='Customer list' editable={{
+                <MaterialTable columns={columns} data={customers} title='Customer list'  editable={{
                     onRowAdd: async(newRow) => {
                         await handleAddNewCustomer(newRow)
                         fetchData()
@@ -170,6 +172,8 @@ export default function Customerlist() {
                     </Box>
                 </Modal>
             </ThemeProvider>
+            <ReactCSV/>
         </div>
     );
 }
+
