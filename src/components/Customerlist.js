@@ -39,6 +39,8 @@ export default function Customerlist() {
     const columns = [
         { title: 'Firstname', field: 'firstname' },
         { title: 'Lastname', field: 'lastname' },
+        {title: 'Email', field: 'email'},
+        {title: 'Phone', field: 'phone'}
 
     ];
 
@@ -48,6 +50,7 @@ export default function Customerlist() {
         fetch('https://customerrest.herokuapp.com/api/customers')
             .then(response => response.json())
             .then(data => setCustomers(data.content))
+            
     }
     //handle CRUD
     const handleAddNewCustomer = async(rowData) => {
