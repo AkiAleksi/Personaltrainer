@@ -35,12 +35,12 @@ export default function Customerlist() {
     const [training, setTraining] = useState();
     //Theme for material-table
     const defaultMaterialTheme = createTheme();
-    
+
     const columns = [
         { title: 'Firstname', field: 'firstname' },
         { title: 'Lastname', field: 'lastname' },
-        {title: 'Email', field: 'email'},
-        {title: 'Phone', field: 'phone'}
+        { title: 'Email', field: 'email' },
+        { title: 'Phone', field: 'phone' }
 
     ];
 
@@ -50,18 +50,18 @@ export default function Customerlist() {
         fetch('https://customerrest.herokuapp.com/api/customers')
             .then(response => response.json())
             .then(data => setCustomers(data.content))
-            
+
     }
     //handle CRUD
-    const handleAddNewCustomer = async(rowData) => {
+    const handleAddNewCustomer = async (rowData) => {
         await saveCustomer(rowData)
     }
 
-    const handleEditCustomer = async(href, rowData) => {
+    const handleEditCustomer = async (href, rowData) => {
         await editCustomer(rowData, href)
     }
 
-    const handleDeleteCustomer = async(href) => {
+    const handleDeleteCustomer = async (href) => {
         await deleteCustomer(href)
     }
 
@@ -73,16 +73,16 @@ export default function Customerlist() {
 
     const handleTrainingDate = (e) => {
         setTrainingDate(e)
-        
+
     }
 
     const handleDuration = (e) => {
         setDuration(e.target.value)
-        
+
     }
 
-    const handleSave = async() => {
-        let customerHref = addTraining.links.find(i => i.rel === 'customer').href 
+    const handleSave = async () => {
+        let customerHref = addTraining.links.find(i => i.rel === 'customer').href
         if (!customerHref || !duration || !training || !trainingDate) return
         const data = {
             customer: customerHref,
@@ -91,45 +91,45 @@ export default function Customerlist() {
             activity: training
 
         }
-        
+
         await saveTrainingSession(data)
         handleCancel()
-        
+
     }
 
     const handleCancel = () => {
         setOpen(false)
         setAddTraining({})
         setTrainingDate(undefined)
-        
+
     }
 
     return (
-        
+
         <div style={{ maxWidth: '100%' }}>
             <ThemeProvider theme={defaultMaterialTheme}>
-                <MaterialTable columns={columns} data={customers} title='Customer list'  editable={{
-                    onRowAdd: async(newRow) => {
+                <MaterialTable columns={columns} data={customers} title='Customer list' editable={{
+                    onRowAdd: async (newRow) => {
                         await handleAddNewCustomer(newRow)
                         fetchData()
-                       
+
 
                     },
-                    onRowUpdate: async(newRow, oldRow) => {
+                    onRowUpdate: async (newRow, oldRow) => {
                         const updatedData = [...customers]
                         updatedData[oldRow.tableData.id] = newRow
-                        let customerHref = oldRow.links.find(i => i.rel === 'customer').href 
+                        let customerHref = oldRow.links.find(i => i.rel === 'customer').href
                         await handleEditCustomer(customerHref, newRow)
                         setCustomers(updatedData)
-                        
+
 
                     },
 
-                    onRowDelete: async(selectedRow) => {
-                        let customerHref = selectedRow.links.find(i => i.rel === 'customer').href 
+                    onRowDelete: async (selectedRow) => {
+                        let customerHref = selectedRow.links.find(i => i.rel === 'customer').href
                         await handleDeleteCustomer(customerHref)
                         fetchData()
-                       
+
 
                     }
 
@@ -151,31 +151,31 @@ export default function Customerlist() {
                     aria-describedby="modal-modal-description"
                 >
                     <Box sx={style}>
-                    <Stack spacing={2}>
-                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                            Add a new training session for a customer
-                        </Typography>
-                        <TextField hiddenLabel id="filled-hidden-label-small" defaultValue={addTraining.firstname} variant="filled" size="small" disabled />
-                        <TextField hiddenLabel id="filled-hidden-label-small" defaultValue={addTraining.lastname} variant="filled" size="small" disabled />
-                        <TextField label="Add a training session" id="filled-hidden-label-small" variant="standard" size="small" onChange={e => setTraining(e.target.value)} />
-                        <TextField label="Duration in minutes" id="filled-hidden-label-small" type="number" variant="standard" size="small"   onChange={handleDuration} />
-                        <LocalizationProvider dateAdapter={ AdapterMoment}>
+                        <Stack spacing={2}>
+                            <Typography id="modal-modal-title" variant="h6" component="h2">
+                                Add a new training session for a customer
+                            </Typography>
+                            <TextField hiddenLabel id="filled-hidden-label-small" defaultValue={addTraining.firstname} variant="filled" size="small" disabled />
+                            <TextField hiddenLabel id="filled-hidden-label-small" defaultValue={addTraining.lastname} variant="filled" size="small" disabled />
+                            <TextField label="Add a training session" id="filled-hidden-label-small" variant="standard" size="small" onChange={e => setTraining(e.target.value)} />
+                            <TextField label="Duration in minutes" id="filled-hidden-label-small" type="number" variant="standard" size="small" onChange={handleDuration} />
+                            <LocalizationProvider dateAdapter={AdapterMoment}>
 
-                            <DateTimePicker
-                                label="Date desktop"
-                                inputFormat="MM/DD/YYYY hh:mm"
-                                value={trainingDate}
-                                onChange={handleTrainingDate}
-                                renderInput={(params) => <TextField {...params} />}
-                            />
-                        </LocalizationProvider>
-                        <Button variant="text" onClick={() => handleSave()}>Save</Button>
-                        <Button variant="text" onClick={() => handleCancel()} >Cancel</Button>
+                                <DateTimePicker
+                                    label="Date desktop"
+                                    inputFormat="MM/DD/YYYY hh:mm"
+                                    value={trainingDate}
+                                    onChange={handleTrainingDate}
+                                    renderInput={(params) => <TextField {...params} />}
+                                />
+                            </LocalizationProvider>
+                            <Button variant="text" onClick={() => handleSave()}>Save</Button>
+                            <Button variant="text" onClick={() => handleCancel()} >Cancel</Button>
                         </Stack>
                     </Box>
                 </Modal>
             </ThemeProvider>
-            <ReactCSV/>
+            <ReactCSV customers={customers} />
         </div>
     );
 }
