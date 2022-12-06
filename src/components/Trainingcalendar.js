@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import FullCalendar, { preventContextMenu } from '@fullcalendar/react'
+import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction';
 import moment from 'moment';
@@ -8,7 +8,6 @@ import moment from 'moment';
 export default function Trainingcalendar() {
 
   const [trainings, setTrainings] = useState([]);
-  const [trainingSessions, setTrainingSessions] = useState([]);
 
 
 
