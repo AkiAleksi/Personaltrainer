@@ -8,7 +8,7 @@ import { deleteTraining } from '../helper/api';
 
 export default function Traininglist() {
     const [trainings, setTrainings] = useState([]);
-    
+
     const columns = [
         { title: 'Training', field: 'activity' },
         { title: 'Date and time', field: 'date' },

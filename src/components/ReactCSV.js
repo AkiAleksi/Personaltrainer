@@ -2,10 +2,6 @@ import React from "react";
 import { CSVLink } from 'react-csv';
 
 
-
-
-
-
 const ReactCSV = (props) => {
 
   const headers = [
@@ -15,9 +11,6 @@ const ReactCSV = (props) => {
     { label: 'Phone', key: 'phone' }
 
   ];
-
-
-
 
   return (
 

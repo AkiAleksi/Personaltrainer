@@ -39,8 +39,6 @@ export default function Trainingchart() {
         }
 
 
-
-
         let grouped = _.groupBy(trainingData, "activity")
         let sumActivity = []
         for (const [key, value] of Object.entries(grouped)) {
@@ -56,9 +54,10 @@ export default function Trainingchart() {
 
         setTrainings(sumActivity)
     }
-   
+
 
     return (
+
         <ResponsiveContainer width="100%" aspect={3}>
             <BarChart
                 width={500}
@@ -79,6 +78,7 @@ export default function Trainingchart() {
                 <Bar dataKey="minutes" fill="#8884d8" />
             </BarChart>
         </ResponsiveContainer>
+
     );
 }
 

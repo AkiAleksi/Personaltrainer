@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Traininglist from './Traininglist';
@@ -21,12 +21,12 @@ function TabApp() {
                 <Tab value="Calendar" label="Training calendar" />
                 <Tab value="Chart" label="Training chart" />
             </Tabs>
-            {tab === 'Training' && <Traininglist/>}
-            {tab === 'Customer' && <Customerlist/>}
-            {tab === 'Calendar' && <Trainingcalendar/>}
-            {tab === 'Chart' && <Trainingchart/>}
+            {tab === 'Training' && <Traininglist />}
+            {tab === 'Customer' && <Customerlist />}
+            {tab === 'Calendar' && <Trainingcalendar />}
+            {tab === 'Chart' && <Trainingchart />}
         </div>
     )
-    
+
 }
 export default TabApp;
