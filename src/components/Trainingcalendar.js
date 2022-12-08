@@ -45,7 +45,7 @@ export default function Trainingcalendar() {
     for (let i = 0; i < trainingData.length; i++) {
       let training = trainingData[i]
       let obj = {
-        title: " / " + training.activity + " / " + training.customer.lastname,
+        title: " / " + training.activity,
         start: training.date,
         end: training.date
       }
